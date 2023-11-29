@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<struts-config>
+      <form-beans>
+           <form-bean name="HF" type="beans.Hello"> </form-bean>      
+      </form-beans>
+      
+      <action-mappings>
+          <action path="/hello" name="HF" input="/index.jsp" type="beans.HelloController">
+          <forwrard name="success" path="/success.jsp"></forwrard>
+          </action>
+      
+      </action-mappings>
+      
+      <messages-resources parameters="beans/Messages" />
+</struts-config>
