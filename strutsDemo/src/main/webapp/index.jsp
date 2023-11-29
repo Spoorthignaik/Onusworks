@@ -14,15 +14,18 @@
 
    <h1>Hello Form</h1>
    
-     <form action="hello">
+     <html:form action="hello">
      
-       <html type="text"  name="name">
-       <html:errors/>
-       <html type="submit" value="click here">
+       <html:text property="name"/>
+            
+
+      
+       
+       <html:submit value="click here"/>
      
    
      
-     </form>
+    </html:form>
 
 </body>
 </html>

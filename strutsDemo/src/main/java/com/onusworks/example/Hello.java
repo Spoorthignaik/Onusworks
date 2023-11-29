@@ -1,16 +1,19 @@
 package com.onusworks.example;
 
+
+
 import javax.servlet.ServletRequest;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-@WebServlet("/")
-public class Hello extends ActionForm {
+
+public class Hello extends ActionForm{
 
 	private String name;
 
@@ -23,7 +26,7 @@ public class Hello extends ActionForm {
 	}
 
 	@Override
-	public ActionErrors validate(ActionMapping arg0, ServletRequest req) {
+	public ActionErrors validate(ActionMapping arg0, HttpServletRequest req) {
 
 		ActionErrors ae = new ActionErrors();
 		if (name.equals(""))

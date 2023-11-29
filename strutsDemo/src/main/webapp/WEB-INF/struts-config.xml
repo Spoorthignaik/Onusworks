@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <struts-config>
-      <form-beans>
-           <form-bean name="HF" type="beans.Hello"> </form-bean>      
-      </form-beans>
-      
-      <action-mappings>
-          <action path="/hello" name="HF" input="/index.jsp" type="beans.HelloController">
-          <forwrard name="success" path="/success.jsp"></forwrard>
-          </action>
-      
-      </action-mappings>
-      
-      <messages-resources parameters="beans/Messages" />
-</struts-config>
+	<form-beans>
+		<form-bean name="HF" type="com.onusworks.example.Hello"></form-bean>
+	</form-beans>
+	<action-mappings>
+		<action name="HF" path="/hello" type="com.onusworks.example.HelloController">
+			<forward name="success" path="/success.jsp"></forward>
+		</action>
+	</action-mappings>
+	<message-resources parameter="com/onusworks/example/Messages"></message-resources>
+</struts-config>    

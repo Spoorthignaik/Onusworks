@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- beans to validator -->
+<struts-config>
+	<form-beans>
+		<form-bean name="RF" type="beans.RegForm"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action name="RF" path="/reg" validate="true" scope="session"
+			input="/index.jsp"></action>
+	</action-mappings>
+
+
+	<message-resources parameter="resources/Messages" />
+
+
+
+
+	<plug-in
+		className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,
+                             /WEB-INF/EmpReg.xml" />
+	</plug-in>
+
+
+</struts-config>      
