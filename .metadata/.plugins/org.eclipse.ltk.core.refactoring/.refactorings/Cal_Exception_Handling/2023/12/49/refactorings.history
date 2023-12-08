@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Cal_Exception_Handling/src/main/webapp/erro.jsp&apos; to &apos;error.jsp&apos;" description="Rename resource &apos;erro.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/erro.jsp" name="error.jsp" stamp="1701856011464" updateReferences="true"/>
+</session>

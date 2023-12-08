@@ -1,0 +1,13 @@
+package beans;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+
+public class TilesBean extends ActionForm{
+	
+	private String name;
+	private String email;
+	private String address;
+	
+
+}

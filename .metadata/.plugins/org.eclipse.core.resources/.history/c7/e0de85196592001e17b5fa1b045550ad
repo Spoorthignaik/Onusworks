@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div style="background-color: aqua; ; border-style: dashed">
+
+   <pre>
+   
+   <a href="./goto.do?page=home">HOME</a>
+   <a href="./goto.do?page=about">ABOUT</a>
+   <a href="./goto.do?page=batches">BATCHES</a>      <a href="./goto.do?page=home">HOME</a>
+   <a href="./goto.do?page=contact">CONTACT</a>
+    <a href="./goto.do?page=reg">REG</a>
+   </pre>
+
+
+</div>
+
+</body>
+</html>

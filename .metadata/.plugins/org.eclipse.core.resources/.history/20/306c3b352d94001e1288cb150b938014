@@ -1,0 +1,7 @@
+package controller;
+
+import org.apache.struts.action.ExceptionHandler;
+
+public class AeHandler  extends ExceptionHandler{
+
+}

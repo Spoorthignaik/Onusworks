@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+   
+   
+<tiles-definitions>
+    <definition name="welcomehome" template="/template/welcomehome.html">
+        <put-attribute name="menu" value="/views/menu.html" />
+        <put-attribute name="head" value="/views/head.html" />
+        <put-attribute name="foot" value="/views/footer.html" />
+    </definition>
+    
+    <definition name="reg" extends="welcomehome">
+        <put-attribute name="body" value="body/reg.jsp" />
+    </definition>
+    
+    <definition name="about" extends="welcomehome">
+        <put-attribute name="body" value="/body/about.html" />
+    </definition>
+    
+    <definition name="contact" extends="welcomehome">
+        <put-attribute name="body" value="/body/contact.html" />
+    </definition>
+</tiles-definitions>

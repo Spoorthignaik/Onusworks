@@ -1,0 +1,33 @@
+package controller;
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DownloadAction;
+
+public class FileDownloadController extends DownloadAction {
+
+	@Override
+	protected StreamInfo getStreamInfo(ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse resp) throws Exception {
+
+		String filename = req.getParameter("filename");
+		if (filename.contains("struts")) {
+			File file=new File("C:/Users/Test/Desktop/filesForDownload/strutsBook.png");
+
+		}
+		if (filename.contains("pk")) {
+
+		}
+		
+		if (filename.contains("image")) {
+
+		}
+		return null;
+	}
+
+}

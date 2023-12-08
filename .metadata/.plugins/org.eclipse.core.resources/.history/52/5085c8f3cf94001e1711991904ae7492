@@ -1,0 +1,9 @@
+package controller;
+
+import org.apache.struts.action.Action;
+
+public class LoginSuccess extends Action{
+
+	
+	
+}

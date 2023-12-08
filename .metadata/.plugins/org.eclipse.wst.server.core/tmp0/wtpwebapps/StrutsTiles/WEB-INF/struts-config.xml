@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+   <form-beans>
+     <form-bean name="RF" type="beans.TilesBean">
+     <form-property name="name" type="java.lang.String" />
+     <form-property name="email" type="java.lang.String" />
+     <form-property name="address" type="java.lang.String" />
+      
+      </form-bean>
+   </form-beans>
+
+ <action-mappings>
+     <action path="/goto" type="controller.TilesViewForwardController">
+     <forward name="home" path="welcomehome"/>
+     <forward name="about" path="about"/>
+     <forward name="contact" path="contact"/>
+     <forward name="batches" path="batches"/>
+      <forward name="reg" path="reg"/>
+     </action>
+     
+     <!-- reg -->
+     <action path="/reg" name="RF" input="/index.jsp">
+     </action>
+     
+      </action-mappings>
+     
+     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+
+     <message-resources parameter="resources/Messages"></message-resources>
+     
+     <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definations-config" value="/WEB-INF/tiles.xml"/>  
+     </plug-in>
+
+</struts-config>
