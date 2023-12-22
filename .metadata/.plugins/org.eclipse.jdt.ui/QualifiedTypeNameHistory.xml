@@ -43,7 +43,9 @@
     <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
     <fullyQualifiedTypeName name="org.apache.struts.action.ExceptionHandler"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="org.apache.struts.action.Action"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="org.apache.struts.action.RequestProcessor"/>
+    <fullyQualifiedTypeName name="org.apache.struts.action.Action"/>
+    <fullyQualifiedTypeName name="beans.StudentForm"/>
+    <fullyQualifiedTypeName name="beans.StudentDto"/>
 </qualifiedTypeNameHistroy>

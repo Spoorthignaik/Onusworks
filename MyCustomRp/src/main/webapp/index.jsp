@@ -10,7 +10,7 @@
 
   <form action="./login.do">
      <pre>
-   UserName : <input type="text" naame="uname" />
+   UserName : <input type="text" name="uname" />
    Password : <input type="password" name="pword" />
               <input type="submit" value="Login">     
      </pre>

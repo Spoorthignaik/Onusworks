@@ -8,9 +8,11 @@
 </head>
 <body>
 
+       <a href="./index.jsp"><h2>Hello...<%=session.getAttribute("uname") %> </h2> Logout </a>
+
 
 <pre>
-   <input type="submit" value="COMPOSE" />                                       <a href="./index.jsp"><h2>Hello...<%=session.getAttribute("uname") %> </h2> Logout </a>
+   <input type="submit" value="COMPOSE" />                                      
    <input type="submit" value="INBOX" />
    <input type="submit" value="SENT" />
    <input type="submit" value="DROP" />

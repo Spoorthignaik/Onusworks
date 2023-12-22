@@ -9,7 +9,7 @@
     </form-beans>
     
     <action-mappings>
-     <action path="/reg" name="Emp" validate="true" input="/index.jsp" />
+     <action path="/reg"  name="Emp"  validate="true" input="/index.jsp" />
     </action-mappings>
     
   

@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="myPack1" extends="struts-default">
+      
+      <result-types>
+         <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+      </result-types>
+
+      <action name="loginaction" method="execute" class="com.javaskool.struts.MenuAction">
+         <result name="success">/success.jsp</result>
+      </action>
+
+   </package>
+   
+</struts>

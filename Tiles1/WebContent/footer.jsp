@@ -1,0 +1,1 @@
+<h4 align="center"> &copy; Copyrigth Reserved to Javaskool Ltd.</h4>

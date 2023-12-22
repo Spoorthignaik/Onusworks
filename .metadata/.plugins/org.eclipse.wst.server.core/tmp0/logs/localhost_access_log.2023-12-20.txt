@@ -1,0 +1,6 @@
+127.0.0.1 - - [20/Dec/2023:10:47:34 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [20/Dec/2023:10:47:40 +0530] "GET /EmpCrud_LookupDispatchAction/ HTTP/1.1" 200 681
+0:0:0:0:0:0:0:1 - - [20/Dec/2023:10:47:41 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [20/Dec/2023:10:47:44 +0530] "POST /EmpCrud_LookupDispatchAction/form.do;jsessionid=57DFE06A93E005A3C0D302210127CF59 HTTP/1.1" 200 713
+0:0:0:0:0:0:0:1 - - [20/Dec/2023:10:47:58 +0530] "POST /EmpCrud_LookupDispatchAction/form.do HTTP/1.1" 500 2811
+0:0:0:0:0:0:0:1 - - [20/Dec/2023:10:48:03 +0530] "POST /EmpCrud_LookupDispatchAction/form.do HTTP/1.1" 500 2811

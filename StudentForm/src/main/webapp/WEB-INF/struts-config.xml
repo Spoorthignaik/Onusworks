@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+   <form-beans>
+     <form-bean name="studentForm" type="beans.StudentForm">
+     
+      </form-bean>
+   </form-beans>
+
+ <action-mappings>
+     <action  name="studentForm" path="/StudentInfo" type="controller.StudentController" scope="session">
+     <forward name="success" path="/student.jsp"/>
+   
+     </action>
+     
+   
+     
+      </action-mappings>
+     
+    
+     <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definations-config" value="/WEB-INF/tiles.xml"/>  
+     </plug-in>
+
+</struts-config>
