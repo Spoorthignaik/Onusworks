@@ -1,0 +1,370 @@
+=====================================================
+
+SERVLETS
+
+=====================================================
+Servlets are Java-based components that provide a platform-independent, server-side extension for developing web applications. 
+They are part of the Java Enterprise Edition (Java EE) technology and are used to handle client requests and generate dynamic web content. 
+Servlets run on the server side and allow Java developers to create web applications that are both robust and scalable.
+
+====================================================
+
+1. Servlet Lifecycle:
+=====================================================
+Servlets have a well-defined lifecycle consisting of several methods:
+
+init(): Initializes the servlet.
+service(): Handles client requests.
+doGet(), doPost(), doPut(), doDelete(): Specific methods for handling different HTTP request types.
+destroy(): Cleans up resources when the servlet is removed from the server.
+
+=====================================================
+
+2. SERVLET MAPPING
+=====================================================
+Servlets are mapped to specific URL patterns in the web.xml configuration file or 
+by using annotations (@WebServlet) in modern servlet containers. 
+This mapping determines which servlet handles which client requests.
+
+=========================================================
+
+3. Request and Response Objects:
+=========================================================
+Servlets handle client requests through HttpServletRequest and send responses using HttpServletResponse objects. 
+These objects allow servlets to read data from the client and send data back to the client's browser.
+
+===========================================================
+
+4. Session Management:
+============================================================
+Servlets can manage user sessions using HttpSession to store user-specific information across multiple requests. 
+Sessions allow servlets to maintain stateful interactions with clients.
+
+===============================================================
+
+EXAMPLE OF HTTP SESSION
+===============================================================
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/SessionExample")
+public class SessionExample extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        // Get the current session, or create one if it doesn't exist
+        HttpSession session = request.getSession(true);
+
+        // Set some session attributes
+        session.setAttribute("username", "john_doe");
+        session.setAttribute("userRole", "admin");
+
+        // Set response content type
+        response.setContentType("text/html");
+
+        // Get the PrintWriter object to write the HTML page
+        PrintWriter out = response.getWriter();
+
+        // Write HTML response
+        out.println("<html><head><title>Session Example</title></head><body>");
+        out.println("<h2>Session Example</h2>");
+        out.println("<p>Session attributes set successfully.</p>");
+        out.println("<p><a href='SessionDisplay'>Go to Session Display</a></p>");
+        out.println("</body></html>");
+    }
+}
+
+==========================================================
+
+URL REWRITE
+===========================================================
+CLASS -1
+------------------------------------
+package com.onusworks.simple;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Servlet1")
+public class Servlet1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public Servlet1() {
+		super();
+
+	}
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		resp.getWriter().append("Served at: ").append(req.getContextPath());
+
+		resp.setContentType("text/html");
+		try (PrintWriter out = resp.getWriter()) {
+
+			out.println("<!DOCTYPE html");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet</title>");
+			out.println("</head>");
+			out.println("<body>");
+
+			String name = req.getParameter("user_name");
+			out.println("<h1>your name is " + name + "</h1>");
+//			out.println("<a href='Servlet2?user="+name+"'>Go to second servlet</a>");
+
+		// hidden form field
+			out.println("" + "<form action='Servlet2'>" + "<input type='hidden' name='user_name' value='" + name
+					+ "' />" + "<button>Go to the second servlet</button>" + "" + "" + "</form>");
+
+			out.println("</body>");
+			out.println("</html>");
+
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-----------------------------------------------------------------------------
+CLASS -2
+----------------------------------------------------------
+package com.onusworks.simple;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Servlet2")
+public class Servlet2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public Servlet2() {
+		super();
+
+	}
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		resp.getWriter().append("Served at: ").append(req.getContextPath());
+
+		resp.setContentType("text/html");
+		try (PrintWriter out = resp.getWriter()) {
+
+			out.println("<!!DOCTYPE html");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet</title>");
+			out.println("</head>");
+			out.println("<body>");
+
+			out.println("<h1>Welcome to servlet2</h1>");
+			String name = req.getParameter("user_name");
+			out.println("<h1 style='color:blue'>your name is " + name + "</h1>");
+	// url rewrite
+	// <a href="nextPage?sessionID=abc123">Next Page</a>
+			out.println("<a href='Servlet2?user=" + name + "'> servlet 2</a>");
+			out.println("<h1 style='color:red'>Welcome back to servlet2 " + name + "</h1>");
+
+			out.println("</body>");
+			out.println("</html>");
+
+		}
+
+	}
+
+}
+-----------------------------------------------------------
+INDEX-FILE
+------------------------------------------------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>URL REWRITE</title>
+</head>
+<body>
+
+	<form action="Servlet1" method="get">
+		<input type="text" name="user_name" placeholder="Enter Your Name">
+		<br> <br>
+		<button type="submit">Go</button>
+	</form>
+
+
+</body>
+</html>
+================================================================
+
+COOKIES
+
+================================================================
+CLASSS--1
+-----------------------------------------------------------
+package com.onusworks.example;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Process1")
+public class Process1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public Process1() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+
+		response.setContentType("text/html");
+
+		String uname = request.getParameter("uname");
+		String subj = request.getParameter("subj");
+
+		// creating cookie
+
+		Cookie cref1 = new Cookie("ckname", uname);
+		Cookie cref2 = new Cookie("csubj", subj); // name and value
+
+		cref1.setMaxAge(365 * 24 * 60 * 60);
+		response.addCookie(cref1);
+
+		cref2.setMaxAge(365 * 24 * 60 * 60);
+		response.addCookie(cref2);
+
+		RequestDispatcher rd = request.getRequestDispatcher("Process2");
+		rd.forward(request, response);
+
+	}
+
+}
+---------------------------------------------------------------------------------
+
+CLASS--2
+----------------------------------------------------------
+
+
+package com.onusworks.example;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Process2")
+public class Process2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public Process2() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		// cookies
+		Cookie arr[] = request.getCookies();
+
+		out.println("<h1> User name=" + arr[0].getValue() + "</h1>");
+		out.println("<h1> Subject Name=" + arr[1].getValue() + "</h1>");
+		out.close();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+
+	}
+
+}
+
+-----------------------------------------------------------------
+INDEX
+------------------------------------------------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>My Cookies</title>
+</head>
+<body>
+
+   <form action="Process1" method="post">
+Enter User Name <input type="text" name="uname" />
+Enter Favorite Subject <input type="text" name="subj" />
+  <input type="submit" value="Click here">
+
+  </form>
+
+</body>
+</html>
+
+==================================================================
+
+
+
+
+
+
+
+
+
+
+

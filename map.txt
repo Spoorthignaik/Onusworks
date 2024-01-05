@@ -1,0 +1,9 @@
+MAP   -- Map it is interface 
+        * Key and Value Pair Together --
+	*Each key and value pair known as entry
+
+Hash Map --- it contains only Unique Keys
+	    * it may have one null key and multiple values
+            * it does not maintain any order
+
+hashcode -- it returns the memory references of the object in the form of integer

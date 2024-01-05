@@ -1,0 +1,116 @@
+
+
+
+
+
+package beans;
+
+import org.apache.struts.action.ActionForm;
+
+public class HelloWorld extends ActionForm{
+	public String getHello() {
+		return hello;
+	}
+
+	public void setHello(String hello) {
+		this.hello = hello;
+	}
+
+	private String hello;
+
+}
+
+
+
+//contraoller class
+
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+
+public class HelloAction extends Action {
+	
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("Inside Action Class");
+		return mapping.findForward("success");
+	}
+}
+
+
+
+//hello.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>Welcome .
+</body>
+</html> 
+
+//index.jsp                                                                                                                                                                                                              <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+index
+<form action="hello" method="get">
+	<input type="submit" value="ok">
+</form>
+</body>
+</html>
+
+//struts-config file
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="helloWorld" type="beans.HelloWorld"></form-bean>
+	</form-beans>
+	<action-mappings>
+		<action name="helloWorld" type="controller.HelloAction" path="/hello" >
+			<forward name="success" path="/hello.jsp"/>
+		</action>
+		
+	</action-mappings>
+</struts-config>
+
+//web.xml file
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+ id="WebApp_ID" version="4.0">
+  <display-name>struts-Hello</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>action</servlet-name>
+  	<servlet-class>org.apache.struts.actions.ActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>action</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+i'm getting  The requested resource [/struts-Hello/hello] is not available error
+
+
