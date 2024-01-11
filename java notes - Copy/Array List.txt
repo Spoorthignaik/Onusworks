@@ -1,0 +1,163 @@
+Iterator -- It provides the facility of iterating the elements in a forward direction only.
+
+public boolean hasNext(){} -- it returns true if the iterator has more element otherwise it returns false .
+public Object next(){} -- it returns the element and move cursor point to the next element .
+public void remove(){}  -- it removes the last element returns by the iterator 
+
+ArrayList :* can contain duplicate elements
+     	   * it maintain insertion order
+	   * it is index based
+	   * Manipulation is slower
+	   * we cannot create array list as primitive , we can use wrapper classes .
+
+	ArrayList<int> al = ArrayList<int>(); // does not work  
+	ArrayList<Integer> al = new ArrayList<Integer>(); // works fine  
+
+package com.onusworks.example;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ArrayLi {
+
+	public static void main(String[] args) {
+
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("spoorthi");
+		list.add("vismaya");
+		list.add("bindu");
+		list.add("supreetha");
+		list.add("spoorthi");
+
+		System.out.println("=====sorting the element Names=====");
+		Collections.sort(list);
+
+		Iterator itr = list.iterator();
+		while (itr.hasNext()) {
+			System.out.println("Array List :" + itr.next());
+		}
+
+		// reverse
+
+		ArrayList<String> place = new ArrayList<String>();
+		place.add("india");
+		place.add("australia");
+		place.add("korea");
+		place.add("newzeland");
+		place.add("canada");
+
+		System.out.println("========for each and Lamda ");
+
+		place.forEach(a -> {
+			System.out.println(a);
+		});
+
+		System.out.println("========REVERSE=========");
+		ListIterator<String> pl = place.listIterator(list.size());
+		while (pl.hasPrevious()) {
+			String str = pl.previous();
+			System.out.println(str);
+
+		}
+
+		// Integer
+
+		ArrayList<Integer> li = new ArrayList<Integer>();
+		li.add(78);
+		li.add(23);
+		li.add(108);
+		li.add(14);
+
+		System.out.println("========Sorting the Numbers========");
+		Collections.sort(li);
+
+		System.out.println("Array List : " + li);
+
+		// for Each
+
+		ArrayList<String> fruit = new ArrayList<String>();
+		fruit.add("mango");
+		fruit.add("pineapple");
+		fruit.add("grapes");
+		fruit.add("pomogranate");
+		fruit.add("apple");
+
+		System.out.println("======sorting the elements=======");
+		Collections.sort(fruit);
+
+		for (String ref : fruit) {
+			System.out.println(ref);
+		}
+
+		System.out.println("======== get=========");
+		// get
+		System.out.println("Returning Element :" + fruit.get(0));
+		// set
+		System.out.println("=========set=========");
+
+		fruit.set(1, "stawberry");
+		for (String ref2 : fruit) {
+			System.out.println(ref2);
+		}
+
+		// Linked List
+		System.out.println("=========Linked List=======");
+
+		List<String> list2 = new LinkedList<String>();
+		list2.add("sahana");
+		list2.add("swathi");
+		list2.add("soundarya");
+		list2.add("shwetha");
+
+		System.out.println("Linked Kist :" + list2);
+
+	}
+
+}
+
+
+
+LINKED LIST ----- * It contains duplicate value
+		  * it maintain insertion order
+		  * it is not synchronized
+		  * manipulation is faster because No shifting needs to occur
+
+
+LIST----  It maintaon order
+
+SET ---- It is Un order
+		  
+SET ---- 
+
+     HASH SET--- * It allows only unique value
+		 * It doesnot allow repeated elements
+		 * It Accept null values
+		 * Initial default capacity of HASH SET is 16  and capcaity factor 0.75
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+Spoorthi G
+Onusworks Software India Pvt. Ltd.
+305, 5th A Cross Rd, HRBR Layout 3rd Block, HRBR Layout, Kalyan Nagar, Bengaluru,
+ Karnataka 560043
+Ph No:9108879029
+
+PG Address
+Spoorthi G
+Sri Lakshmi Durga Luxury PG for Ladies
+Vyalikaval HBCS Layout, Nagavara, Bengaluru, Karnataka 560045,India
+Ph No:9108879029
+
+
+	Class.forName("com.mysql.jdbc.Driver");
+
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+		// querry
+		String q = "insert into employe values(?,?,?,?)";
+
+		PreparedStatement pstm = con.prepareStatement(q);
+		pstm.setInt(1, id);
+		pstm.setString(2, name);
+		pstm.setString(3, email);
+		pstm.setFloat(4, salary);
+
+		int i=pstm.executeUpdate();
+		return i;

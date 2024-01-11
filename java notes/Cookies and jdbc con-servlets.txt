@@ -1,0 +1,170 @@
+
+
+CREATING COOKIES
+
+==============================================================
+CLASS 1--
+
+package com.onusworks.example;
+
+import java.io.IOException;
+
+
+@WebServlet("/Process1")
+public class Process1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Process1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		
+		
+		response.setContentType("text/html");
+		
+		String uname=request.getParameter("uname");
+		String subj=request.getParameter("subj");
+		
+		//creating cookie
+		
+		Cookie cref1=new Cookie("ckname", uname);
+		Cookie cref2=new Cookie("csubj", subj); //name and value
+		
+		
+		cref1.setMaxAge(365*24*60*60);
+		response.addCookie(cref1);
+		
+		cref2.setMaxAge(365*24*60*60);
+		response.addCookie(cref2);
+		
+		RequestDispatcher rd=request.getRequestDispatcher("Process2");
+		rd.forward(request, response);
+		
+		
+		
+	}
+
+}
+
+=============================================================
+CLASS 2--
+============================================================
+
+package com.onusworks.example;
+
+@WebServlet("/Process2")
+public class Process2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Process2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		//cookies
+		Cookie arr[]=request.getCookies();
+		
+		out.println("<h1> User name="+ arr[0].getValue()+"</h1>");
+		out.println("<h1> Subject Name="+ arr[1].getValue()+"</h1>");
+		out.close();
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		
+		
+	}
+
+}
+
+
+
+
+
+==============================================================
+
+JDBC CONNECTION ----SERVLETS
+
+==============================================================
+
+
+
+package com.onusworks.example;
+
+
+@WebServlet("/register")
+public class Register extends HttpServlet {
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		resp.setContentType("text/html");
+		try (PrintWriter out = resp.getWriter()) {
+
+			out.println("<!DOCTYPE html");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet</title>");
+			out.println("</head>");
+			out.println("<body>");
+
+			// getting all the incoming details from the server
+			String name = req.getParameter("user_name");
+			String password = req.getParameter("user_password");
+			String email = req.getParameter("user_email");
+
+			out.println(name);
+			out.println(password);
+			out.println(email);
+
+			// CONNECTION(jdbc)
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+				// querry
+				String q = "insert into reg_table(name,password,email) values(?,?,?)";
+
+				PreparedStatement pstm = con.prepareStatement(q);
+				pstm.setString(1, name);
+				pstm.setString(2, password);
+				pstm.setString(3, email);
+
+				pstm.executeUpdate();
+				out.println("done....");
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.println("error");
+			}
+
+			out.println("</body>");
+			out.println("<html>");
+		}
+	}
+
+}

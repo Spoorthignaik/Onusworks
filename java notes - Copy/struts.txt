@@ -1,0 +1,11 @@
+                                                STRUTS
+
+for making enterprise applllication
+
+3 LAYERS --1.presentation
+	   2.Controller
+	   3.Model
+
+MVC 2 --1.Business
+	2.DAO
+	3.Service

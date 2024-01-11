@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<struts-config>
+	<form-beans>
+		<form-bean name="bean" type="bean.DataBean"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action name="bean" path="/DataBean" type="bean.DataBean" scope="request">
+		<forward name="bean" path="/index.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

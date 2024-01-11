@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+	<definition name="${YOUR_DEFINITION_HERE}"></definition>
+	<definition name="baseLayout" path="/baseLayout.jsp">
+		<put name="title" value="Tiles Example"/>
+		<put name="header" value="/header.jsp"/>
+		<put name="menu" value="/menu.jsp"/>
+		<put name="body" value="/body.jsp"/>
+		<put name="footer" value="/footer.jsp"/>
+	</definition>
+	<definition name="add" extends="baseLayout">
+		<put name="title" value="add"/>
+		<put name="body" value="/InsertForm.jsp"/>
+	</definition>
+	<definition name="edit" extends="baseLayout">
+		<put name="title" value="edit"/>
+		<put name="body" value="/UpdateForm.jsp"/>
+	</definition>
+	<definition name="delete" extends="baseLayout">
+		<put name="title" value="delete"/>
+		<put name="body" value="/DeleteForm.jsp"/>
+	</definition>
+	<definition name="view" extends="baseLayout">
+		<put name="title" value="view"/>
+		<put name="body" value="/SelectForm.jsp"/>
+	</definition>
+</tiles-definitions>

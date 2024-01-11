@@ -1,0 +1,283 @@
+VALIDATION --STRUTS
+
+================================================================
+ Bean class
+
+================================================================
+package beans;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.validator.ValidatorForm;
+
+public class RegForm extends ValidatorForm {
+
+	private int id;
+	private long phone;
+	private String creditcard;
+	private float salary;
+	private String name;
+	private String email;
+	// ActionErrors errors;
+
+	public RegForm() {
+		System.out.println("Created RegForm object");
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public long getPhone() {
+		return phone;
+	}
+
+	public String getCreditcard() {
+		return creditcard;
+	}
+
+	public float getSalary() {
+		return salary;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setPhone(long phone) {
+		this.phone = phone;
+	}
+
+	public void setCreditcard(String creditcard) {
+		this.creditcard = creditcard;
+	}
+
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+}
+========================================================
+//Messages.properties file
+========================================================
+
+errors.range={0} is not in the range {1} through {2}.
+errors.required={0} is required.
+errors.email={0} is an invalid e-mail address.
+errors.creditcard={0} is an invalid credit card number.
+errors.invalid={0} is invalid.
+
+========================================================
+//EmpReg.xml --custom xml file
+========================================================
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE form-validation PUBLIC
+        "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.3.0//EN"
+        "http://jakarta.apache.org/commons/dtds/validator_1_3_0.dtd">
+
+<form-validation>
+
+	<!-- common validation for all locale -->
+	<formset>
+		<form name="RF">
+			<field property="id" depends="intRange">
+				<arg key="id" resource="false" />
+				<arg key="${var:min}" resource="false" />
+				<arg key="${var:max}" resource="false" />
+				<var>
+					<var-name>min</var-name>
+					<var-value>111</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>999</var-value>
+				</var>
+			</field>
+
+			<field property="name" depends="required">
+				<arg key="name" resource="false" />
+			</field>
+			<field property="email" depends="required,email">
+				<arg key="email" resource="false" />
+			</field>
+
+			<field property="creditcard" depends="required,creditCard">
+				<arg key="creditcard" resource="false" />
+			</field>
+		</form>
+	</formset>
+
+	<!-- Indian mobile validation and salary validation -->
+	<formset language="en" country="IN">
+		<form name="RF">
+			<field property="salary" depends="floatRange">
+				<arg key="salary" resource="false" />
+				<arg key="${var:min}" resource="false" />
+				<arg key="${var:max}" resource="false" />
+				<var>
+					<var-name>min</var-name>
+					<var-value>10000.5</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>200000.5</var-value>
+				</var>
+			</field>
+			<field property="phone" depends="required,mask">
+				<arg key="phone" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[7-9]\d{9}$</var-value>
+				</var>
+			</field>
+
+		</form>
+	</formset>
+
+	<!-- US mobile validation and salary validation -->
+
+	<formset language="en" country="US">
+		<form name="RF">
+			<field property="salary" depends="floatRange">
+				<arg key="salary" resource="false" />
+				<arg key="${var:min}" resource="false" />
+				<arg key="${var:max}" resource="false" />
+				<var>
+					<var-name>min</var-name>
+					<var-value>100000.5</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>2000000.5</var-value>
+				</var>
+			</field>
+			<field property="phone" depends="required, mask">
+				<arg key="phone" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[2-4]\d{9}$</var-value>
+				</var>
+			</field>
+
+		</form>
+	</formset>
+
+
+
+</form-validation>
+
+==========================================================
+
+struts-config.xml
+========================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+       "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+       "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- beans to validator -->
+<struts-config>
+	<form-beans>
+		<form-bean name="RF" type="beans.RegForm"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action name="RF" path="/reg" validate="true" scope="session"
+			input="/index.jsp"></action>
+	</action-mappings>
+
+
+	<message-resources parameter="resources/Messages" />
+
+
+
+
+	<plug-in
+		className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,
+                             /WEB-INF/EmpReg.xml" />
+	</plug-in>
+
+
+</struts-config>  
+
+===========================================================
+web.xml
+===========================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>RegForm_VF</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+
+		<init-param>
+			<param-name>action</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
+
+================================================================ 
+index.jsp
+================================================================
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Validation Form</title>
+</head>
+<body>
+
+   <h1>Registration From</h1>
+   <html:form action="reg" onsubmit="return validateRF(this)" method="post">
+   <html:javascript formName="RF"/>
+<pre>
+id :     <html:text property="id"/> <html:errors property="id"/>
+Name :   <html:text property="name"/> <html:errors property="name"/>  
+Email :  <html:text property="email"/> <html:errors property="email"/>
+Salary : <html:text property="salary"/> <html:errors property="salary"/>
+CreditCard : <html:text property="creditcard"/> <html:errors property="creditcard"/>
+Phone :  <html:text property="phone"/> <html:errors property="phone"/>
+
+         <html:submit value="Submit"/>
+    </pre>     
+  </html:form>  
+     
+</body>
+</html>
+================================================================   

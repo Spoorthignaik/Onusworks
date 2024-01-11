@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+   <data-sources />
+   <form-beans >
+      <form-bean name="exampleForm" type="org.apache.struts.action.DynaActionForm">
+         <form-property name="age" type="java.lang.Integer" initial="23" />
+         <form-property name="name" type="java.lang.String" initial="Rajavel" />
+      </form-bean>
+   </form-beans>
+
+   <global-exceptions />
+   <global-forwards />
+   <action-mappings >
+      <action
+         attribute="exampleForm"
+         input="/form/example.jsp"
+         name="exampleForm"
+         path="/example"
+         scope="request"
+         type="de.laliluna.tutorial.dynaactionform.action.ExampleAction" >
+         <forward name="showExample" path="/form/example.jsp" />
+      </action>
+
+
+   </action-mappings>
+
+   <message-resources parameter="de.laliluna.tutorial.dynaactionform.ApplicationResources" />
+</struts-config>
+

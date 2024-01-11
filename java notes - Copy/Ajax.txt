@@ -1,0 +1,20 @@
+AJAX ---- Asynchronus JavaScript and Xml
+
+    AJAX helps in fetching data asynchronously without interfering with the 
+existing page .
+   * No Page reload/refresh
+
+==========================================
+USES OF AJAX
+==========================================  
+   *No page reload/refresh
+   *Better user experience
+   * Saves network bandwidth
+   *Very interactive.
+
+=============================================
+HOW IT WORKS
+=============================================
+ AJAX uses XMLHttpRequest Object (also called xhr object)to acheive this
+ Modern websites use JSON instead or xml for data transfer
+ Data can be transferred in any format and protocol(Not always https necessarily

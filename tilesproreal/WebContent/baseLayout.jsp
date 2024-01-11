@@ -10,14 +10,14 @@
             <title><tiles:getAsString name="title" ignore="true" /></title>
     </head>
     <body>
-        <table border="5" cellpadding="5" cellspacing="5" align="center" width=50%>
+        <table border="1" cellpadding="2" cellspacing="2" align="center">
             <tr>
-                <td height="50%" colspan="2">
+                <td height="20%" colspan="2">
                     <tiles:insert attribute="header" ignore="true" />
                 </td>
             </tr>
             <tr>
-                <td width="40%" height="550">
+                <td width="20%" height="250">
                     <tiles:insert attribute="menu" />
                 </td>
                 <td>

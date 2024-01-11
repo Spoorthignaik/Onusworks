@@ -1,0 +1,118 @@
+_____________________________________________________________________________________________________________________________________________                                        
+
+                                                     -----: STORED PROCEDURE  :-----
+____________________________________________________________________________________________________________________________________________
+  * A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+  * So if you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it.
+  * You can also pass parameters to a stored procedure, so that the stored procedure can act based on the parameter value(s) that is passed.
+___________________________________________________________________________________________________________________________________________
+          SYNTAX ---
+__________________________________________________________________________________________________________________________________________
+  CREATE PROCEDURE procedureName
+  @ParameterName datatype
+  AS
+  BEGIN
+    SQL statements
+    SELECT,INSERT, UPDATE OR DELETE STATEMENTS.
+  END
+--------------------------------------------------------------------------------------------------------------------------------------------
+          TO EXECUTE STORED PROCEDURE 
+---------------------------------------------------------------------------------------------------------------------------------------------
+    spProcedureName
+   EXEC procedureName
+      or
+   EXECUTE procedureName
+_______________________________________________________________________________________________________________________________________________
+NOTE :
+.MDF FILE : Data file(Contains Actual Data)
+.LDF FILE : Transaction Log File(used to recover the database)
+______________________________________________________________________________________________________________________________________________
+          EXAMPLE : Parameter and variable have an @prefix in their name
+______________________________________________________________________________________________________________________________________________
+
+   CREATE PROCEDURE spGetEmployeeGenderAndDepartment
+   @Gender nvarchar(50),
+   @DepartmentID int
+   AS
+   BEGIN
+     SELECT EployeeName, Gender,DepartmentId FROM Employees WHERE Gender=@Gender and DepartmentId=@DepartmentId
+   END
+
+  TO EXECUTE STORED PROCEDURE
+  EXEC spGetEmployeeGenderAndDepartment 'Female',3
+
+-------------------------------------------------------------------------------------
+ID  |    Gender |  EployeeName  | DepartmentId |
+_____________________________________________  
+1   	Male	Vishal	        1
+2	Female	Gowri	        4
+3	Female	Jeevika	        2
+4	Female	Ramya	        3
+5	Male	Varun	        6
+6	Female	Spoorthi	8
+
+______________________________________________________________________________________________
+
+TO VIEW THE TEXT OF THE STORED PROCEDURE
+   
+    1.Use system stored procedure 'sp_helptext storedProcedureName '
+    2. Right Click the sp in Object explorer ->scrip procedure as ->create to -> New query Editor window
+
+-------------------------------------------------------------------------------------------------
+To change the stored procedure use ALTER PROCEDURE STATEMENT
+
+   Eg :--
+      ALTER PROCEDURE spGetEmployees  
+      AS
+      BEGIN
+         SELECT EmployeeName,Gender FROM Employees ORDER BY EmployeeName
+      END 
+---------------------------------------------------------------------------------------------------
+TO DELETE STORED PROCEDURE 
+
+    DROP PROCEDURE spName
+    DROP PROC spName
+
+________________________________________________________________________________________________________
+
+                               STORED PROCEDURE -- OUTPUT PARAMETERS
+
+____________________________________________________________________________________________________________
+           To create an sp with output parameters we use the keyword out or output
+
+  CREATE PROCEDURE spGetEmployeeCountByGender
+  @Gender nvarchar(50),
+  @EmployeeCount int output
+  AS
+  BEGIN
+    SELECT @EmployeeCount= COUNT(ID)
+    FROM tblEmployee
+    Where Gender=@Gender
+  END
+
+      To excecute the stored procedure with output parameters
+  
+ DECLARE @EmployeeTotal int
+ EXECUTE spGetEmployeeCountByGender 'Male', @EmployeeTotal OUTPUT
+ PRINT @EmployeeTotal
+ 
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
